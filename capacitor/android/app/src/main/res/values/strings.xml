@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">CordovaMigration</string>
+    <string name="title_activity_main">CordovaMigration</string>
+    <string name="package_name">com.ionic.io.demo.cordova.migration</string>
+    <string name="custom_url_scheme">com.ionic.io.demo.cordova.migration</string>
+</resources>
