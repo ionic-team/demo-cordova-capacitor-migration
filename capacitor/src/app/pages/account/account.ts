@@ -27,8 +27,6 @@ export class AccountPage implements AfterViewInit {
   }
 
   async updatePicture() {
-    console.log('Clicked to update picture');
-
     this.photo = await this.userData.setPicture();
   }
 

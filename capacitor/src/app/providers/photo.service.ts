@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { File } from '@ionic-native/file/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Plugins, CameraResultType, FilesystemDirectory, Capacitor } from '@capacitor/core';
 
 @Injectable({
@@ -11,18 +9,17 @@ export class PhotoService {
   USER_PROFILE_PIC: string = "user_profile";
   AVATAR_PIC: string = "https://www.gravatar.com/avatar?d=mm&s=140";
 
-  constructor(private file: File, private webview: WebView) 
-  { }
+  constructor() { }
 
   async loadSaved(): Promise<Photo> {
     const { Storage } = Plugins;
 
-    let photo = await Storage.get({ key: this.USER_PROFILE_PIC });
-    console.log(photo);
-    //     || {
-    //     filepath: this.AVATAR_PIC,
-    //     webviewPath: this.AVATAR_PIC
-    // };
+    let photoData = await Storage.get({ key: this.USER_PROFILE_PIC });
+    
+    const photo = JSON.parse(photoData.value)  || {
+        filepath: this.AVATAR_PIC,
+        webviewPath: this.AVATAR_PIC
+    };
     
     return photo;
   }
@@ -70,7 +67,8 @@ export class PhotoService {
       directory: FilesystemDirectory.Data
     });
 
-    // Rewrite from a device filepath (file:// protocol) to the local HTTP server (https:// protocol) hosting this Ionic app by using the 
+    // Rewrite from a device filepath (file:// protocol) to the local HTTP server 
+    // (https:// protocol) hosting this Ionic app by using the 
     // Capacitor.convertFileSrc helper function.
     return {
       filepath: savedFile.uri,
