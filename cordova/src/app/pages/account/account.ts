@@ -23,7 +23,7 @@ export class AccountPage implements AfterViewInit {
 
   async ngAfterViewInit() {
     this.getUsername();
-    this.photo = (await this.userData.getPicture()).webviewPath;
+    this.photo = await this.userData.getPicture();
   }
 
   async updatePicture() {
